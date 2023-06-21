@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Kumbh+Sans:wght@400;700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Kumbh+Sans:wght@400;700&display=swap");
 
 /* @link https://utopia.fyi/type/calculator?c=320,16,1.125,1240,20,1.2,5,2,&s=0.75|0.5|0.25,1.5|2|3|4|6,s-l&g=s,l,xl,12 */
 
@@ -21,31 +21,10 @@
 
 /* typography */
 :root {
-  /* Step -2: 12.64px → 13.89px */
-  --step--2: clamp(0.79rem, calc(0.76rem + 0.14vw), 0.87rem);
-
-  /* Step -1: 14.22px → 16.67px */
-  --step--1: clamp(0.89rem, calc(0.84rem + 0.27vw), 1.04rem);
-
-  /* Step 0: 16.00px → 20.00px */
-  --step-0: clamp(1.00rem, calc(0.91rem + 0.43vw), 1.25rem);
-
-  /* Step 1: 18.00px → 24.00px */
-  --step-1: clamp(1.13rem, calc(0.99rem + 0.65vw), 1.50rem);
-
-  /* Step 2: 20.25px → 28.80px */
-  --step-2: clamp(1.27rem, calc(1.08rem + 0.93vw), 1.80rem);
-
-  /* Step 3: 22.78px → 34.56px */
-  --step-3: clamp(1.42rem, calc(1.17rem + 1.28vw), 2.16rem);
-
-  /* Step 4: 25.63px → 41.47px */
-  --step-4: clamp(1.60rem, calc(1.26rem + 1.72vw), 2.59rem);
-
-  /* Step 5: 28.83px → 49.77px */
-  --step-5: clamp(1.80rem, calc(1.35rem + 2.28vw), 3.11rem);
+  --fs: 16px;
+  --ff: "Kumbh Sans", sans-serif;
+  --br: 10px;
 }
-
 
 /*
   Josh Comeau CSS Reset 
@@ -162,10 +141,9 @@ a {
 
 body {
   /* 22 -> 150 */
-  --space-inline: clamp()
-  font-size: var(--step-0);
-  font-family: 'Kumbh Sans', sans-serif;
-  /* background-color: var(--c-black-opacity); */
+  font-size: var(--fs);
+  font-family: var(--ff);
+  padding: 1rem;
 }
 
 h3 {
@@ -173,11 +151,11 @@ h3 {
 }
 
 h2 {
-  font-size: var(--step-4)
+  font-size: var(--step-4);
 }
 
 h1 {
-  font-size: var(--step-5)
+  font-size: var(--step-5);
 }
 
 hr {
@@ -188,12 +166,76 @@ hr {
   Components styling
 */
 
+/* BUTTONS */
+.btns {
+  display: grid;
+  gap: 1em;
+}
+
+@media screen and (width >= 780px) {
+  .btns {
+    grid-template-columns: 37% auto;
+  }
+}
+
+.btn {
+  --opacity: 0.5;
+  width: 100%;
+  padding-block: 1em;
+  /* 24px -> 1.5em */
+  padding-inline: 1.5em;
+  font-weight: 700;
+  border: none;
+  border-radius: var(--br);
+}
+
+.btn--primary {
+  background-color: var(--c-orange-500);
+  color: var(--c-white);
+}
+
+.btn--primary:hover {
+  opacity: var(--opacity);
+  box-shadow: 0 5px 5px var(--c-orange-100);
+}
+
+.btn--icon {
+  display: flex;
+  gap: 0.875em;
+  justify-content: center;
+  align-items: center;
+}
+
+.btn--secondary {
+  background-color: var(--c-blue-100);
+  color: var(--c-blue-700);
+}
+
+.btn--numbered {
+  display: grid;
+  grid-template-columns: 15px auto 15px;
+  align-items: center;
+  position: relative;
+  text-align: center;
+  user-select: none;
+}
+
+.btn--numbered__minus,
+.btn--numbered__plus {
+  cursor: pointer;
+}
+
+.btn--numbered__minus:hover,
+.btn--numbered__plus:hover {
+  opacity: var(--opacity);
+}
+
 /* Primary Navigation */
 /* breakpoint: 780px turns to mobile */
 .header {
-  --block-space: clamp(1.1rem, 3vw , 1.35rem);
-  --inline-space: clamp(1.25em, 4.24vw,3em);
-  background-color: var(--c-blue-100);  
+  --block-space: clamp(1.1rem, 3vw, 1.35rem);
+  --inline-space: clamp(1.25em, 4.24vw, 3em);
+  background-color: var(--c-blue-100);
 }
 
 .header--desktop {
@@ -215,7 +257,7 @@ hr {
 }
 
 /* horizontal by default, vertical in secondary navigation */
-.nav__list{
+.nav__list {
   display: flex;
 }
 
@@ -225,7 +267,7 @@ hr {
 
 .nav__list > * > a {
   text-transform: capitalize;
-  color: var(--c-blue-600)
+  color: var(--c-blue-600);
 }
 
 .nav__cart {
@@ -250,28 +292,26 @@ hr {
   margin-right: var(--logo-space-right);
 }
 
-
 @media (width >= 780px) {
   .header--desktop {
     display: block;
-  }  
+  }
 
   .header--mobile {
     display: none;
   }
 }
 
-
 /* Product display section */
-.product-display-section{
+.product-display-section {
   --br: 1rem;
 }
-.product-display-section__large-product-img{
+.product-display-section__large-product-img {
   border-radius: var(--br);
   width: 100%;
   margin-block-end: 1.875rem;
 }
-.product-display-section__thumbnails{
+.product-display-section__thumbnails {
   display: flex;
   justify-content: space-between;
   gap: 1rem;
@@ -288,10 +328,9 @@ main {
   grid-template-columns: repeat(2, 1fr);
 }
 
-.right-section{
-
+.right-section {
 }
-.right-section__company-name{
+.right-section__company-name {
   text-transform: uppercase;
   color: var(--c-orange-500);
 }
@@ -325,20 +364,14 @@ main {
 .right-section__discount-chip {
   background-color: var(--c-orange-100);
   color: var(--c-orange-500);
-  font-size: .85rem;
+  font-size: 0.85rem;
   border-radius: 2px;
   padding: 4px 8px;
-  
+
   margin-inline-start: 1rem;
 }
-
-
 
 .right-section__original-price {
   color: var(--c-blue-500);
   text-decoration: line-through;
 }
-
-
-
-
