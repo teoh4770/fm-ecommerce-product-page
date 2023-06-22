@@ -21,7 +21,7 @@
     <span class="btn--numbered__text">1</span>
     <img class="btn--numbered__plus" src="./images/icon-plus.svg" alt="plus">
   </div>
-  
+
   <h4>Group of buttons(mobile)</h4>
   <div class="btns">
     <button class="btn btn--primary">Primary button</button>
@@ -166,9 +166,9 @@
 
 
   <h3>Desktop view Mobile Main section</h3>
-  <h3>Cart Section (Product Info and User action)</h3>
+
   <h3>Product Lightbox Gallery</h3>
-  <div class="lightbox-gallery">
+  <!--<div class="lightbox-gallery">
     <div class="lightbox-gallery__overlay"></div>
     <section class="product-display-section product-display-section--mobile product-display-section--desktop">
       <div class="large-product-img-container">
@@ -188,7 +188,27 @@
         <img src="./images/image-product-4-thumbnail.jpg" alt="product thumbnail">
       </div>
     </section>
-  </div>
+  </div>-->
+  <h3>Cart Section (Product Info and User action)</h3>
+  <section class="cart">
+    <div class="cart__title-container">
+      <p class="cart__title">Cart</p>
+    </div>
+    <div class="cart__items">
+      <div class="cart__item">
+        <img class="item__thumbnail" src="./images/image-product-1-thumbnail.jpg" alt="item 1">
+        <div class="item__detail">
+          <p class="item__name">Fall Limited Edition Sneakers</p>
+          <div>
+            <span class="js-item__price">$125.00</span> x <span class="js-item__amount">3</span>
+            <span class="item__total-price js-item__total-price">$375.00</span>
+          </div>
+        </div>
+        <button class="small-btn delete-btn"></button>
+      </div>
+      <button class="btn btn--primary cart__checkout-btn">Checkout</button>
+    </div>
+  </section>
 </body>
 
 </html>

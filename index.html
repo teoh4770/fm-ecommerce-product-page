@@ -17,7 +17,7 @@
 <body>
   <header class="header header--mobile">
     <nav class="nav nav--mobile">
-      <img src="./images/icon-menu.svg" alt="open menu button" class="nav__menu-btn">
+      <img src="./images/icon-menu.svg" alt="open menu button" class="nav__menu-btn js-menu-btn">
 
       <img src="./images/logo.svg" alt="sneakers" class="nav__logo">
 
@@ -29,10 +29,10 @@
       <img class="nav__profile-icon" src="./images/image-avatar.png" alt="your profile image">
 
 
-      <div class="side-navigation-container hide">
-        <div class="overlay"></div>
-        <div class="side-navigation nav--mobile__side-navigation">
-          <button class="close-btn"></button>
+      <div class="side-navigation-container js-side-nav-container">
+        <div class="overlay js-overlay"></div>
+        <div class="side-menu nav--mobile__side-menu js-side-menu">
+          <button class="close-btn js-close-btn"></button>
           <ul class="nav__list nav__list--mobile">
             <li><a href="#">collections</a></li>
             <li><a href="#">men</a></li>
@@ -113,6 +113,8 @@
       </div>
     </section>
   </main>
+
+  <script src="./app.js"></script>
 </body>
 
 </html>
