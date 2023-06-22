@@ -100,27 +100,6 @@
 
   <h3>Product Display Section</h3>
   <h4>Product display section alone</h4>
-  <h4>Mobile</h4>
-  <section class="product-display-section product-display-section--mobile">
-    <button class="product-display-section__btn product-display-section__btn--left">
-      <img src="./images/icon-previous.svg" alt="go to previous image">
-    </button>
-    <button class="product-display-section__btn product-display-section__btn--right">
-      <img src="./images/icon-next.svg" alt="go to next image">
-    </button>
-    <img class="product-display-section__large-product-img" src="./images/image-product-1.jpg" alt="product image">
-
-  </section>
-  <h4>Desktop</h4>
-  <section class="product-display-section product-display-section--desktop">
-    <img class="product-display-section__large-product-img" src="./images/image-product-1.jpg" alt="product image">
-    <div class="product-display-section__thumbnails">
-      <img src="./images/image-product-1-thumbnail.jpg" alt="product thumbnail">
-      <img src="./images/image-product-2-thumbnail.jpg" alt="product thumbnail">
-      <img src="./images/image-product-3-thumbnail.jpg" alt="product thumbnail">
-      <img src="./images/image-product-4-thumbnail.jpg" alt="product thumbnail">
-    </div>
-  </section>
   <hr>
   <h4>Main Product Display Section</h4>
   <main>
@@ -137,42 +116,77 @@
       hello world
     </section>
   </main>
-  <h3>Right Section (Product Info and User Action)</h3>
-  <section class="product-display-section product-display-section--mobile">
-    <button class="product-display-section__btn product-display-section__btn--left">
-      <img src="./images/icon-previous.svg" alt="go to previous image">
-    </button>
-    <button class="product-display-section__btn product-display-section__btn--right">
-      <img src="./images/icon-next.svg" alt="go to next image">
-    </button>
-    <img class="product-display-section__large-product-img" src="./images/image-product-1.jpg" alt="product image">
-
-  </section>
-  <section class="right-section">
-    <p class="right-section__company-name">Sneaker Company</p>
-    <h2 class="right-section__product-name">Fall Limited Edition Sneakers</h2>
-    <p class="right-section__product-description">Lorem ipsum dolor sit amet consectetur adipisicing elit. Debitis natus
-      libero architecto possimus suscipit,</p>
-
-    <div class="right-section__price">
-      <span>
-        <span class="right-section__price-tag">$125.00</span>
-        <span class="right-section__discount-chip">50%</span>
-      </span>
-      <span class="right-section__original-price">$250.00</span>
-    </div>
-
-    <div class="btns">
-      <div class="btn btn--secondary btn--numbered" data-number="1">
-        <img class="btn--numbered__minus" src="./images/icon-minus.svg" alt="minus">
-        <span class="btn--numbered__text">1</span>
-        <img class="btn--numbered__plus" src="./images/icon-plus.svg" alt="plus">
+  <h3>Mobile Main Section</h3>
+  <!---
+  <main class="grid grid--2up">
+    <section class="product-display-section product-display-section--mobile product-display-section--desktop">
+      <button class="product-display-section__btn product-display-section__btn--left">
+        <img src="./images/icon-previous.svg" alt="go to previous image">
+      </button>
+      <button class="product-display-section__btn product-display-section__btn--right">
+        <img src="./images/icon-next.svg" alt="go to next image">
+      </button>
+      <img class="product-display-section__large-product-img" src="./images/image-product-1.jpg" alt="product image">
+      <div class="product-display-section__thumbnails">
+        <img src="./images/image-product-1-thumbnail.jpg" alt="product thumbnail">
+        <img src="./images/image-product-2-thumbnail.jpg" alt="product thumbnail">
+        <img src="./images/image-product-3-thumbnail.jpg" alt="product thumbnail">
+        <img src="./images/image-product-4-thumbnail.jpg" alt="product thumbnail">
       </div>
-      <button class="btn btn--primary">Primary button</button>
-    </div>
-  </section>
+    </section>
+    <section class="right-section">
+      <p class="right-section__company-name">Sneaker Company</p>
+      <h2 class="right-section__product-name">Fall Limited Edition Sneakers</h2>
+      <p class="right-section__product-description">Lorem ipsum dolor sit amet consectetur adipisicing elit. Debitis
+        natus
+        libero architecto possimus suscipit,</p>
+
+      <div class="right-section__price">
+        <span>
+          <span class="right-section__price-tag">$125.00</span>
+          <span class="right-section__discount-chip">50%</span>
+        </span>
+        <span class="right-section__original-price">$250.00</span>
+      </div>
+
+      <div class="btns">
+        <div class="btn btn--secondary btn--numbered" data-number="1">
+          <img class="btn--numbered__minus" src="./images/icon-minus.svg" alt="minus">
+          <span class="btn--numbered__text">1</span>
+          <img class="btn--numbered__plus" src="./images/icon-plus.svg" alt="plus">
+        </div>
+        <button class="btn btn--primary">Primary button</button>
+      </div>
+    </section>
+  </main>
+  --->
+
+
+
+  <h3>Desktop view Mobile Main section</h3>
   <h3>Cart Section (Product Info and User action)</h3>
   <h3>Product Lightbox Gallery</h3>
+  <div class="lightbox-gallery hide">
+    <div class="lightbox-gallery__overlay"></div>
+    <section class="product-display-section product-display-section--mobile product-display-section--desktop">
+      <div class="large-product-img-container">
+        <button class="close-btn"></button>
+        <img class="product-display-section__large-product-img" src="./images/image-product-1.jpg" alt="product image">
+        <button class="product-display-section__btn product-display-section__btn--left">
+          <img src="./images/icon-previous.svg" alt="go to previous image">
+        </button>
+        <button class="product-display-section__btn product-display-section__btn--right">
+          <img src="./images/icon-next.svg" alt="go to next image">
+        </button>
+      </div>
+      <div class="product-display-section__thumbnails">
+        <img src="./images/image-product-1-thumbnail.jpg" alt="product thumbnail">
+        <img src="./images/image-product-2-thumbnail.jpg" alt="product thumbnail">
+        <img src="./images/image-product-3-thumbnail.jpg" alt="product thumbnail">
+        <img src="./images/image-product-4-thumbnail.jpg" alt="product thumbnail">
+      </div>
+    </section>
+  </div>
 </body>
 
 </html>
