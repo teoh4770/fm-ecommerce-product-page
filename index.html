@@ -4,65 +4,21 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png">
   <title>Frontend Mentor | E-commerce product page</title>
-  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Kumbh+Sans:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./style.css">
 </head>
 
 <body>
-  <header class="header header--mobile">
-    <nav class="nav nav--mobile">
-      <img src="./images/icon-menu.svg" alt="open menu button" class="nav__menu-btn js-menu-btn">
+  <header class="relative js-header">
+    <nav class="nav flex-row">
+      <img class="nav__menu-button js-menu-button pointer" src="./images/icon-menu.svg" alt="open menu button"
+        tabindex="0">
+      <img class="nav__logo" src="./images/logo.svg" alt="sneakers">
 
-      <img src="./images/logo.svg" alt="sneakers" class="nav__logo">
-
-      <div class="nav__cart-icon-container">
-        <span class="nav__cart-indicator" data-item-number="0">1</span>
-        <img class="nav__cart-icon" src="./images/icon-cart--black.svg" alt="open your cart section">
-      </div>
-
-      <img class="nav__profile-icon" src="./images/image-avatar.png" alt="your profile image">
-
-
-      <div class="side-navigation-container js-side-nav-container">
-        <div class="overlay js-overlay"></div>
-        <div class="side-menu nav--mobile__side-menu js-side-menu">
-          <button class="close-btn js-close-btn"></button>
-          <ul class="nav__list nav__list--mobile">
-            <li><a href="#">collections</a></li>
-            <li><a href="#">men</a></li>
-            <li><a href="#">women</a></li>
-            <li><a href="#">about</a></li>
-            <li><a href="#">contact</a></li>
-          </ul>
-        </div>
-      </div>
-    </nav>
-    <section class="cart">
-      <div class="cart__title-container">
-        <p class="cart__title">Cart</p>
-      </div>
-      <div class="cart__items">
-        <div class="cart__item">
-          <img class="item__thumbnail" src="./images/image-product-1-thumbnail.jpg" alt="item 1">
-          <div class="item__detail">
-            <p class="item__name">Fall Limited Edition Sneakers</p>
-            <div>
-              <span class="js-item__price">$125.00</span> x <span class="js-item__amount">3</span>
-              <span class="item__total-price js-item__total-price">$375.00</span>
-            </div>
-          </div>
-          <button class="small-btn delete-btn"></button>
-        </div>
-        <button class="btn btn--primary cart__checkout-btn">Checkout</button>
-      </div>
-    </section>
-  </header>
-  <header class="header header--desktop">
-    <nav class="nav nav--desktop">
-      <img src="./images/logo.svg" alt="sneakers" class="nav__logo">
-
-      <ul class="header__list nav__list nav__list--desktop">
+      <ul class="nav__list flex-row" style="--gap: 1.875em" role="list">
         <li><a href="#">collections</a></li>
         <li><a href="#">men</a></li>
         <li><a href="#">women</a></li>
@@ -70,102 +26,152 @@
         <li><a href="#">contact</a></li>
       </ul>
 
+      <div class="cart-icon push-right relative pointer" tabindex="0">
+        <span class="cart-icon__amount br-2 text-neutral-100" data-item-number="0">1</span>
+        <img class="cart-icon__icon" src="./images/icon-cart--black.svg" alt="your cart">
+      </div>
 
-      <div class="nav__cart-icon-container">
-        <span class="nav__cart-indicator" data-item-number="0">1</span>
-        <img class="nav__cart-icon" src="./images/icon-cart--black.svg" alt="open your cart section">
-      </div>
-      <img class="nav__profile-icon" src="./images/image-avatar.png" alt="your profile image">
+      <img class="nav__profile-image br-full pointer" src="./images/image-avatar.png" alt="your profile image"
+        tabindex="0">
     </nav>
-    <section class="cart">
-      <div class="cart__title-container">
-        <p class="cart__title">Cart</p>
+    <!-- side nav-->
+    <div class="side-container">
+      <div class="side-nav js-side-nav bg-neutral-100" style="--top-space: 2.25rem;">
+        <button class="icon-btn" data-type="close" type="button" aria-label="Close"></button>
+        <ul class="grid-flow" style="--gap: 1.375rem; margin-top: 3rem;" role="list">
+          <li>
+            <a class="font-bold uppercase text-neutral-700" href="#">collections</a>
+          </li>
+          <li>
+            <a class="font-bold uppercase text-neutral-700" href="#">men</a>
+          </li>
+          <li>
+            <a class="font-bold uppercase text-neutral-700" href="#">women</a>
+          </li>
+          <li>
+            <a class="font-bold uppercase text-neutral-700" href="#">about</a>
+          </li>
+          <li>
+            <a class="font-bold uppercase text-neutral-700" href="#">contact</a>
+          </li>
+        </ul>
       </div>
-      <div class="cart__items">
-        <div class="cart__item">
-          <img class="item__thumbnail" src="./images/image-product-1-thumbnail.jpg" alt="item 1">
-          <div class="item__detail">
-            <p class="item__name">Fall Limited Edition Sneakers</p>
-            <div>
-              <span class="js-item__price">$125.00</span> x <span class="js-item__amount">3</span>
-              <span class="item__total-price js-item__total-price">$375.00</span>
+      <div class="overlay js-overlay bg-neutral-800"></div>
+    </div>
+
+    <div class="cart br-2 remove">
+      <p class="cart__title padding-22 font-bold text-neutral-700">Cart</p>
+      <hr>
+      <div class="cart__content padding-22 padding-bottom-32">
+        <ul class="cart__items" role="list">
+          <li class="cart__item grid-flow" style="--gap: 0.9375rem;">
+            <img class="item__thumbnail br-1" src="./images/image-product-1-thumbnail.jpg" alt="item 1">
+            <div class="item__detail">
+              <p class="item__name capitalize">Fall Limited Edition Sneakers</p>
+              <div>
+                <span>$125.00</span> x <span>3</span>
+                <span class="item__total-price font-bold text-neutral-700">$375.00</span>
+              </div>
             </div>
-          </div>
-          <button class="small-btn delete-btn"></button>
-        </div>
-        <button class="btn btn--primary cart__checkout-btn">Checkout</button>
+            <button class="icon-btn" data-type="delete" type="button" aria-label="Delete"></button>
+          </li>
+        </ul>
+        <button class="button cart__button" data-type="primary" aria-label="Checkout">Checkout</button>
       </div>
-    </section>
+    </div>
   </header>
 
-  <main class="grid grid--2up">
-    <section class="product-display-section">
-
-      <div class="img-container">
-        <img class="product-display-section__large-product-img" src="./images/image-product-1.jpg" alt="product image">
-        <button class="product-display-section__btn product-display-section__btn--left">
-          <img src="./images/icon-previous.svg" alt="go to previous image">
+  <main class="main-section grid-flow grid--2up space-bottom" style="--bottom-space: 5rem;">
+    <section class="img-section grid-flow">
+      <div class="relative">
+        <img class="img-section__large-img pointer" data-number="1" src="./images/image-product-1.jpg"
+          alt="product image">
+        <button class="img-section__icon-btn icon-btn" data-type="left-arrow">
         </button>
-        <button class="product-display-section__btn product-display-section__btn--right">
-          <img src="./images/icon-next.svg" alt="go to next image">
+        <button class="img-section__icon-btn icon-btn" data-type="right-arrow">
         </button>
       </div>
 
-      <div class="product-display-section__thumbnails">
-        <img src="./images/image-product-1-thumbnail.jpg" alt="product thumbnail" data-number="1">
-        <img src="./images/image-product-2-thumbnail.jpg" alt="product thumbnail" data-number="2">
-        <img src="./images/image-product-3-thumbnail.jpg" alt="product thumbnail" data-number="3">
-        <img src="./images/image-product-4-thumbnail.jpg" alt="product thumbnail" data-number="4">
+      <div class="thumbnails grid-flow remove">
+        <div data-type="active" data-number="1">
+          <img src="./images/image-product-1-thumbnail.jpg" alt="product thumbnail">
+        </div>
+        <div data-number="2">
+          <img src="./images/image-product-2-thumbnail.jpg" alt="product thumbnail">
+        </div>
+        <div data-number="3">
+          <img src="./images/image-product-3-thumbnail.jpg" alt="product thumbnail">
+        </div>
+        <div data-number="4">
+          <img src="./images/image-product-4-thumbnail.jpg" alt="product thumbnail">
+        </div>
       </div>
-
     </section>
-    <section class="right-section">
-      <p class="right-section__company-name">Sneaker Company</p>
-      <h2 class="right-section__product-name">Fall Limited Edition Sneakers</h2>
-      <p class="right-section__product-description">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Est velit,
+
+    <section class="context-section">
+      <p class="context-section__company uppercase text-primary-400 font-bold ls-1 font-size-300">Sneaker Company</p>
+      <h2 class="context-section__name">Fall Limited Edition Sneakers
+      </h2>
+      <p class="context-section__description text-neutral-400">Lorem ipsum dolor sit amet consectetur, adipisicing elit.
+        Est velit,
         illum, laboriosam nesciunt eius cumque consequuntur ullam distinctio unde excepturi libero. Sit laudantium a
         quidem voluptate molestias, repellendus ullam culpa?</p>
 
-      <div class="right-section__price">
-        <span>
-          <span class="right-section__price-tag">$125.00</span>
-          <span class="right-section__discount-chip">50%</span>
+      <div class="context-section__price-container flex-row">
+        <span class="flex-row align-center" style="--gap: 1rem;">
+          <span class="context-section__discounted-price font-28-44 font-bold text-neutral-700">$125.00</span>
+          <span class="chip context-section__chip bg-primary-100 br-2 text-primary-400">50%</span>
         </span>
-        <span class="right-section__original-price">$250.00</span>
+        <span class="context-section__original-price font-bold line-through ls-1">$250.00</span>
       </div>
 
-      <div class="btns">
-        <div class="btn btn--secondary btn--numbered" data-number="1">
-          <img class="btn--numbered__minus" src="./images/icon-minus.svg" alt="minus">
-          <span class="btn--numbered__text">1</span>
-          <img class="btn--numbered__plus" src="./images/icon-plus.svg" alt="plus">
+      <div class="grid-flow" style="--gap: 1rem;">
+        <div class="button bg-neutral-200 text-neutral-700" data-type="number"
+          aria-label="increase or decrease the amount" data-number="1">
+          <img class="pointer" src="./images/icon-minus.svg" alt="minus" tabindex="0">
+          <span>1</span>
+          <img class="pointer" src="./images/icon-plus.svg" alt="plus" tabindex="0">
         </div>
-        <button class="btn btn--primary btn--icon"><img src="./images/icon-cart--white.svg">Purchase</button>
+        <!--
+        <button class="button flex-row flex-center" data-type="primary">
+          <img src="./images/icon-cart--white.svg">Purchase
+        </button>
+      -->
+        <button class="button flex-row flex-center" data-type="primary">
+          <span class="purchase-text">Purchase</span>
+        </button>
       </div>
     </section>
-    <div class="lightbox-gallery">
-      <div class="lightbox-gallery__overlay"></div>
-      <section class="product-display-section product-display-section--mobile product-display-section--desktop">
-        <div class="large-product-img-container">
-          <button class="close-btn"></button>
-          <img class="product-display-section__large-product-img" src="./images/image-product-1.jpg" alt="product image">
-          <button class="product-display-section__btn product-display-section__btn--left">
-            <img src="./images/icon-previous.svg" alt="go to previous image">
+
+    <div class="lightbox-gallery js-lightbox remove">
+      <div class="overlay lightbox__overlay bg-neutral-800"></div>
+      <section class="img-section lightbox-gallery__content grid-flow">
+        <button class="icon-btn lightbox-gallery__icon-btn" data-type="close" type="button" aria-label="Close"></button>
+        <div class="relative">
+          <img class="img-section__large-img" data-number="1" src="./images/image-product-1.jpg" alt="product image">
+          <button class="img-section__icon-btn icon-btn" data-type="left-arrow">
           </button>
-          <button class="product-display-section__btn product-display-section__btn--right">
-            <img src="./images/icon-next.svg" alt="go to next image">
+          <button class="img-section__icon-btn icon-btn" data-type="right-arrow">
           </button>
         </div>
-        <div class="product-display-section__thumbnails">
-          <img src="./images/image-product-1-thumbnail.jpg" alt="product thumbnail">
-          <img src="./images/image-product-2-thumbnail.jpg" alt="product thumbnail">
-          <img src="./images/image-product-3-thumbnail.jpg" alt="product thumbnail">
-          <img src="./images/image-product-4-thumbnail.jpg" alt="product thumbnail">
+
+        <div class="thumbnails js-thumbnails grid-flow padding-inline-48 remove">
+          <div data-type="active" data-number="1">
+            <img src="./images/image-product-1-thumbnail.jpg" alt="product thumbnail">
+          </div>
+          <div data-number="2">
+            <img src="./images/image-product-2-thumbnail.jpg" alt="product thumbnail">
+          </div>
+          <div data-number="3">
+            <img src="./images/image-product-3-thumbnail.jpg" alt="product thumbnail">
+          </div>
+          <div data-number="4">
+            <img src="./images/image-product-4-thumbnail.jpg" alt="product thumbnail">
+          </div>
         </div>
       </section>
     </div>
   </main>
-
   <script src="./app.js"></script>
 </body>
 

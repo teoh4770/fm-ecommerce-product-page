@@ -1,19 +1,17 @@
 class App {
   constructor() {
     // variable
-    this.cartList = [];
+    this.lightboxIsOpened = false;
+    this.cartIsVisible = false;
 
     // dom elements
-    this.$sideNav = document.querySelector(".js-side-nav-container");
-    this.$menuBtn = document.querySelector(".js-menu-btn");
-    this.$headers = document.querySelectorAll(".header");
+    this.$sideNav = document.querySelector(".js-side-nav");
+    this.$header = document.querySelector(".js-header");
+    this.$cart = document.querySelector(".cart");
+    this.$lightbox = document.querySelector(".js-lightbox");
 
-    this.$largeImg = document.querySelector(
-      ".product-display-section__large-product-img"
-    );
-    this.$thumbnails = document.querySelectorAll(
-      ".product-display-section__thumbnails > img"
-    );
+    // change the img if user click on the
+    this.$largeImgs = document.querySelectorAll(".img-section__large-img");
 
     // functions here
     this.handleEventListeners();
@@ -24,56 +22,117 @@ class App {
       // handle side nav toggle
       this.toggleSideNav(e);
       this.toggleCart(e);
+      this.toggleLightbox(e);
+      this.switchImg(e);
+      this.switchImg2(e);
     });
 
     this.$sideNav.addEventListener("transitionend", function () {
       this.classList.remove("side-nav--animatable");
     });
-
-    this.$thumbnails.forEach((thumbnail) => {
-      thumbnail.addEventListener("click", (e) => {
-        const imgId = e.target.dataset.number;
-        const number = /\d/;
-
-        let srcValue = this.$largeImg.attributes.src.value;
-        let splitted = srcValue.split(number);
-
-        let newSrc = this.insertAndJoin(splitted, -1, imgId);
-
-        this.$largeImg.src = newSrc;
-      });
-    });
   }
 
   toggleSideNav(e) {
-    if (e.target.closest(".js-menu-btn")) {
-      this.$sideNav.classList.add("side-nav--animatable", "side-nav--visible");
+    if (e.target.closest(".js-menu-button")) {
+      this.$sideNav.classList.add("side-nav--visible", "side-nav--animatable");
     }
 
-    if (e.target.closest(".js-overlay") || e.target.matches(".js-close-btn")) {
+    if (
+      e.target.closest(".js-overlay") ||
+      e.target.matches(".icon-btn[data-type='close']")
+    ) {
       this.$sideNav.classList.add("side-nav--animatable");
       this.$sideNav.classList.remove("side-nav--visible");
     }
   }
 
   toggleCart(e) {
-    const header = this.$headers[0];
-    const cartIsVisible = header.classList.contains("cart--visible");
-    const closeTargets =
-      !e.target.closest(".nav__cart-icon-container") &&
-      !e.target.closest(".cart");
+    const rightTargets =
+      !e.target.closest(".cart-icon") && !e.target.closest(".cart");
 
-    if (e.target.closest(".nav__cart-icon-container") && !cartIsVisible) {
-      this.$headers.forEach((header) => {
-        header.classList.add("cart--visible");
-      });
+    if (!this.cartIsVisible && e.target.closest(".cart-icon")) {
+      this.$cart.classList.remove("remove");
+      this.cartIsVisible = true;
     }
 
-    if (cartIsVisible && closeTargets) {
-      this.$headers.forEach((header) => {
-        header.classList.remove("cart--visible");
-      });
+    if (this.cartIsVisible && rightTargets) {
+      this.$cart.classList.add("remove");
+      this.cartIsVisible = false;
     }
+  }
+
+  toggleLightbox(e) {
+    if (e.target.closest(".img-section__large-img")) {
+      if (this.cartIsVisible === true) {
+        this.cartIsVisible = false;
+        return;
+      }
+      this.$lightbox.classList.remove("remove");
+    }
+
+    if (
+      e.target.closest(".lightbox-gallery__icon-btn[data-type='close']") ||
+      e.target.closest(".lightbox__overlay")
+    ) {
+      this.$lightbox.classList.add("remove");
+    }
+  }
+
+  switchImg(e) {
+    if (!e.target.closest(".thumbnails > *")) return;
+
+    const target = e.target.parentElement;
+    const targetId = +target.dataset.number;
+    this.setImgActive(targetId - 1);
+    this.setImgSrc(targetId);
+  }
+
+  switchImg2(e) {
+    const leftBtnIsHit = e.target.closest(".icon-btn[data-type='left-arrow']");
+    const rightBtnIsHit = e.target.closest(
+      ".icon-btn[data-type='right-arrow']"
+    );
+    let value;
+
+    if (!(leftBtnIsHit || rightBtnIsHit)) return;
+
+    value = leftBtnIsHit ? -1 : rightBtnIsHit ? 1 : 0;
+
+    const thumbnailAmount =
+      document.querySelector(".thumbnails").children.length;
+    const currentImgId = +this.$largeImgs[0].dataset.number;
+    let newImgId = currentImgId + value;
+
+    newImgId = this.setNumberInRange(newImgId, 0, thumbnailAmount);
+    this.setImgActive(newImgId - 1);
+    this.setImgSrc(newImgId);
+  }
+
+  setImgActive(targetId) {
+    const thumbnails = document.querySelectorAll(".thumbnails > *");
+
+    thumbnails.forEach((thumbnail, id) => {
+      thumbnail.dataset.type = id % 4 === targetId ? "active" : "inactive";
+    });
+  }
+
+  setImgSrc(newId) {
+    const regex = /\d/;
+
+    if (this.$largeImgs.length === 0) return;
+
+    let srcValue = this.$largeImgs[0].attributes.src.value;
+    let list = srcValue.split(regex);
+    let newString = this.insertAndJoin(list, -1, newId);
+
+    this.$largeImgs.forEach((img) => {
+      img.src = newString;
+      img.dataset.number = newId;
+    });
+  }
+
+  setNumberInRange(val, min, max) {
+    return val === min ? max : val > max ? 1 : val;
   }
 
   insertAndJoin(array, index, newValue) {
