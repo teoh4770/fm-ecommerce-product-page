@@ -9,7 +9,7 @@ class App {
     this.$header = document.querySelector(".js-header");
     this.$cart = document.querySelector(".cart");
     this.$lightbox = document.querySelector(".js-lightbox");
-
+    this.$numberBtn = document.querySelector(".button[data-type='number']");
     // change the img if user click on the
     this.$largeImgs = document.querySelectorAll(".img-section__large-img");
 
@@ -25,6 +25,7 @@ class App {
       this.toggleLightbox(e);
       this.switchImg(e);
       this.switchImg2(e);
+      this.toggleNumberInput(e);
     });
 
     this.$sideNav.addEventListener("transitionend", function () {
@@ -137,6 +138,25 @@ class App {
 
   insertAndJoin(array, index, newValue) {
     return [...array.slice(0, index), newValue, ...array.slice(index)].join("");
+  }
+
+  toggleNumberInput(e) {
+    if (!e.target.closest(".button[data-type='number']")) return;
+
+    const min = +this.$numberBtn.dataset.min;
+    const max = +this.$numberBtn.dataset.max;
+    let number = +this.$numberBtn.dataset.number;
+
+    if (e.target.matches("[data-type='minus'")) {
+      number -= 1;
+    } else if (e.target.matches("[data-type='plus'")) {
+      number += 1;
+    }
+
+    number = number < min ? min : number > max ? max : number;
+    
+    this.$numberBtn.dataset.number = number;
+    this.$numberBtn.querySelector("span").textContent = number;
   }
 }
 
