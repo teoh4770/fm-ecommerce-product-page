@@ -3,7 +3,15 @@ class App {
     // variable
     this.lightboxIsOpened = false;
     this.cartIsVisible = false;
-
+    this.cartItems = [
+      {
+        name: "Fall Limited Edition Sneakers",
+        price: "125.00",
+        amount: "1",
+        imgUrl: "./images/image-product-1.jpg",
+        totalPrice: "125.00",
+      },
+    ];
     // dom elements
     this.$sideNav = document.querySelector(".js-side-nav");
     this.$header = document.querySelector(".js-header");
@@ -26,6 +34,7 @@ class App {
       this.switchImg(e);
       this.switchImg2(e);
       this.toggleNumberInput(e);
+      this.togglePurchaseButton(e);
     });
 
     this.$sideNav.addEventListener("transitionend", function () {
@@ -49,9 +58,14 @@ class App {
 
   toggleCart(e) {
     const rightTargets =
-      !e.target.closest(".cart-icon") && !e.target.closest(".cart");
+      !e.target.closest(".cart-icon") &&
+      !e.target.closest(".cart") &&
+      !e.target.closest(".purchase-button");
 
-    if (!this.cartIsVisible && e.target.closest(".cart-icon")) {
+    if (
+      !this.cartIsVisible &&
+      (e.target.closest(".cart-icon") || e.target.closest(".purchase-button"))
+    ) {
       this.$cart.classList.remove("remove");
       this.cartIsVisible = true;
     }
@@ -154,9 +168,43 @@ class App {
     }
 
     number = number < min ? min : number > max ? max : number;
-    
+
     this.$numberBtn.dataset.number = number;
     this.$numberBtn.querySelector("span").textContent = number;
+  }
+
+  togglePurchaseButton(e) {
+    if (!e.target.closest(".purchase-button")) return;
+
+    this.toggleCart(e);
+    const cartContent = this.$cart.querySelector(".cart__content");
+    this.populateCartItems(cartContent);
+  }
+
+  populateCartItems(cartContent) {
+    // get the current item
+    // update the list
+    // add new, update existing (add, delete)
+    // populate the list
+    const result = this.cartItems
+      .map(
+        (item, index) => `
+    <li class="cart__item grid-flow" style="--gap: 0.9375rem;">
+    <img class="item__thumbnail br-1" src="${item.imgUrl}" alt="item 1">
+    <div class="item__detail">
+      <p class="item__name capitalize">${item.name}</p>
+      <div>
+        <span>$${item.price}</span> x <span>${item.amount}</span>
+        <span class="item__total-price font-bold text-neutral-700">$${item.totalPrice}</span>
+      </div>
+    </div>
+    <button class="icon-btn" data-type="delete" type="button" aria-label="Delete" data-id="${index}"></button>
+  </li>
+    `
+      )
+      .join("");
+
+    console.log(result);
   }
 }
 
