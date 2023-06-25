@@ -3,15 +3,21 @@ class App {
     // variable
     this.lightboxIsOpened = false;
     this.cartIsVisible = false;
-    this.cartItems = [
+    this.collections = [
       {
+        id: "0",
         name: "Fall Limited Edition Sneakers",
         price: "125.00",
-        amount: "1",
         imgUrl: "./images/image-product-1.jpg",
-        totalPrice: "125.00",
+        thumbnails: [
+          "./image-product-1-thumbnail.jpg",
+          "./image-product-2-thumbnail.jpg",
+          "./image-product-3-thumbnail.jpg",
+          "./image-product-4-thumbnail.jpg",
+        ],
       },
     ];
+    this.cartItems = [];
     // dom elements
     this.$sideNav = document.querySelector(".js-side-nav");
     this.$header = document.querySelector(".js-header");
@@ -20,9 +26,16 @@ class App {
     this.$numberBtn = document.querySelector(".button[data-type='number']");
     // change the img if user click on the
     this.$largeImgs = document.querySelectorAll(".img-section__large-img");
+    this.$cartContent = this.$cart.querySelector(".cart__content");
 
     // functions here
+    this.initialise();
     this.handleEventListeners();
+  }
+
+  initialise() {
+    this.updateCartContentState();
+    this.updateCartIndicator();
   }
 
   handleEventListeners() {
@@ -35,6 +48,7 @@ class App {
       this.switchImg2(e);
       this.toggleNumberInput(e);
       this.togglePurchaseButton(e);
+      this.toggleRemoveButton(e);
     });
 
     this.$sideNav.addEventListener("transitionend", function () {
@@ -176,16 +190,81 @@ class App {
   togglePurchaseButton(e) {
     if (!e.target.closest(".purchase-button")) return;
 
+    this.updateCartItems();
+    this.updateCartIndicator();
+    this.updateCartContentState();
+    this.populateCartItems();
     this.toggleCart(e);
-    const cartContent = this.$cart.querySelector(".cart__content");
-    this.populateCartItems(cartContent);
   }
 
-  populateCartItems(cartContent) {
+  updateCartItems() {
+    //  1. get the current object id from main section
+    const itemId = document.querySelector(".main-section").id;
+
+    // 2. get the id that match the target obj in the collection
+    const collection = this.collections.find(({ id }) => id === itemId);
+
+    if (!collection) return;
+
+    // 3. if the user have bought the item, then just add the number of the item up, otherwise, add it as new to the cart list
+    const targetItem = this.cartItems.find(({ id }) => id === collection.id);
+    const targetIndex = this.cartItems.findIndex(
+      ({ id }) => id === collection.id
+    );
+
+    if (targetItem) {
+      let amount = targetItem.amount + this.getNumberBtnValue();
+
+      if (amount > this.getNumberBtnMax()) {
+        alert("Cannot buy more than " + this.getNumberBtnMax() + " items!");
+      } else {
+        targetItem.amount = amount;
+      }
+
+      targetItem.totalPrice = this.round(
+        targetItem.amount * +targetItem.price,
+        2
+      );
+
+      this.cartItems = [
+        ...this.cartItems.slice(0, targetIndex),
+        targetItem,
+        ...this.cartItems.slice(targetIndex + 1),
+      ];
+    } else {
+      let newCartItem = this.createDefaultCartItem(collection);
+
+      // update the amount
+      newCartItem.amount = this.getNumberBtnValue();
+
+      newCartItem.totalPrice = this.round(
+        newCartItem.amount * +newCartItem.price,
+        2
+      );
+
+      this.cartItems = [...this.cartItems, newCartItem];
+    }
+
+    console.log(this.cartItems);
+  }
+
+  createDefaultCartItem({ id, name, price, imgUrl }) {
+    return {
+      id,
+      name,
+      price,
+      amount: 0,
+      imgUrl,
+      totalPrice: 0,
+    };
+  }
+
+  populateCartItems() {
     // get the current item
     // update the list
     // add new, update existing (add, delete)
     // populate the list
+
     const result = this.cartItems
       .map(
         (item, index) => `
@@ -204,7 +283,61 @@ class App {
       )
       .join("");
 
-    console.log(result);
+    this.$cartContent.querySelector(".cart__items").innerHTML = result;
+  }
+
+  getNumberBtnValue() {
+    return +this.$numberBtn.dataset.number;
+  }
+
+  getNumberBtnMax() {
+    return +this.$numberBtn.dataset.max;
+  }
+
+  updateCartContentState() {
+    if (this.cartItems.length === 0) {
+      this.$cartContent.querySelector(".empty-msg").classList.remove("remove");
+      this.$cartContent.querySelector(".cart__items").classList.add("remove");
+      this.$cartContent.querySelector(".cart__button").classList.add("remove");
+    } else {
+      this.$cartContent.querySelector(".empty-msg").classList.add("remove");
+      this.$cartContent
+        .querySelector(".cart__items")
+        .classList.remove("remove");
+      this.$cartContent
+        .querySelector(".cart__button")
+        .classList.remove("remove");
+    }
+  }
+
+  toggleRemoveButton(e) {
+    if (!e.target.closest(".icon-btn[data-type='delete']")) return;
+
+    const deleteBtn = e.target;
+    const deleteItemId = deleteBtn.dataset.id;
+
+    this.cartItems = this.cartItems.filter(
+      (item, index) => index != deleteItemId
+    );
+
+    this.updateCartIndicator();
+    this.updateCartContentState();
+  }
+
+  updateCartIndicator() {
+    const cartIndicator = document.querySelector(".cart-icon__amount");
+    if (this.cartItems.length === 0) {
+      cartIndicator.classList.add("remove");
+    } else {
+      cartIndicator.classList.remove("remove");
+      cartIndicator.textContent = this.cartItems.length;
+    }
+  }
+
+  round(value, decimalPlaces) {
+    return Number(
+      Math.round(parseFloat(value + "e" + decimalPlaces)) + "e-" + decimalPlaces
+    ).toFixed(decimalPlaces);
   }
 }
 

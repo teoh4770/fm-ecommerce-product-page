@@ -559,7 +559,7 @@ a:focus,
   background-color: var(--c-neutral-100);
   margin-inline: 1rem;
   box-shadow: 0 0 10px var(--c-neutral-700);
-  max-width: 22.8125rem;
+  min-width: 22.8125rem;
   z-index: 10;
 }
 

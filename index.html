@@ -27,7 +27,7 @@
       </ul>
 
       <div class="cart-icon push-right relative pointer" tabindex="0">
-        <span class="cart-icon__amount br-2 text-neutral-100" data-item-number="0">1</span>
+        <span class="cart-icon__amount br-2 text-neutral-100">0</span>
         <img class="cart-icon__icon" src="./images/icon-cart--black.svg" alt="your cart">
       </div>
 
@@ -63,25 +63,15 @@
       <p class="cart__title padding-22 font-bold text-neutral-700">Cart</p>
       <hr>
       <div class="cart__content padding-22 padding-bottom-32">
+        <p class="empty-msg remove">Your cart is empty!</p>
         <ul class="cart__items" role="list">
-          <li class="cart__item grid-flow" style="--gap: 0.9375rem;">
-            <img class="item__thumbnail br-1" src="./images/image-product-1-thumbnail.jpg" alt="item 1">
-            <div class="item__detail">
-              <p class="item__name capitalize">Fall Limited Edition Sneakers</p>
-              <div>
-                <span>$125.00</span> x <span>3</span>
-                <span class="item__total-price font-bold text-neutral-700">$375.00</span>
-              </div>
-            </div>
-            <button class="icon-btn" data-type="delete" type="button" aria-label="Delete"></button>
-          </li>
         </ul>
         <button class="button cart__button" data-type="primary" aria-label="Checkout">Checkout</button>
       </div>
     </div>
   </header>
 
-  <main class="main-section grid-flow grid--2up space-bottom" style="--bottom-space: 5rem;">
+  <main id="0" class="main-section grid-flow grid--2up space-bottom" style="--bottom-space: 5rem;">
     <section class="img-section grid-flow">
       <div class="relative">
         <img class="img-section__large-img pointer" data-number="1" src="./images/image-product-1.jpg"
