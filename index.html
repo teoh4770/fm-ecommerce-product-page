@@ -13,7 +13,7 @@
 
 <body>
   <header class="relative js-header">
-    <nav class="nav flex-row">
+    <nav class="nav flex-row relative">
       <img class="nav__menu-button js-menu-button pointer" src="./images/icon-menu.svg" alt="open menu button"
         tabindex="0">
       <img class="nav__logo" src="./images/logo.svg" alt="sneakers">
@@ -33,6 +33,17 @@
 
       <img class="nav__profile-image br-full pointer" src="./images/image-avatar.png" alt="your profile image"
         tabindex="0">
+
+      <div class="cart br-2 remove">
+        <p class="cart__title padding-22 font-bold text-neutral-700">Cart</p>
+        <hr>
+        <div class="cart__content padding-22 padding-bottom-32">
+          <p class="empty-msg text-center remove">Your cart is empty!</p>
+          <ul class="cart__items" role="list">
+          </ul>
+          <button class="button cart__button" data-type="primary" aria-label="Checkout">Checkout</button>
+        </div>
+      </div>
     </nav>
     <!-- side nav-->
     <div class="side-container">
@@ -57,17 +68,6 @@
         </ul>
       </div>
       <div class="overlay js-overlay bg-neutral-800"></div>
-    </div>
-
-    <div class="cart br-2 remove">
-      <p class="cart__title padding-22 font-bold text-neutral-700">Cart</p>
-      <hr>
-      <div class="cart__content padding-22 padding-bottom-32">
-        <p class="empty-msg text-center remove">Your cart is empty!</p>
-        <ul class="cart__items" role="list">
-        </ul>
-        <button class="button cart__button" data-type="primary" aria-label="Checkout">Checkout</button>
-      </div>
     </div>
   </header>
 
