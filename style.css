@@ -256,6 +256,10 @@ img {
   );
 }
 
+.text-center {
+  text-align: center;
+}
+
 .br-1 {
   border-radius: var(--br-1);
 }
@@ -638,11 +642,21 @@ a:focus,
   }
 
   .img-section__large-img {
+    cursor: pointer;
     aspect-ratio: unset;
   }
 
   .img-section__icon-btn {
     display: none;
+  }
+
+  .lightbox-gallery__content .img-section__icon-btn {
+    --space: -1.25rem;
+    display: block;
+  }
+
+  .lightbox-gallery__content .img-section__large-img {
+    cursor: auto;
   }
 
   .context-section {

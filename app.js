@@ -330,7 +330,11 @@ class App {
       cartIndicator.classList.add("remove");
     } else {
       cartIndicator.classList.remove("remove");
-      cartIndicator.textContent = this.cartItems.length;
+      let number = this.cartItems.reduce(
+        (acc, cartItem) => acc + cartItem.amount,
+        0
+      );
+      cartIndicator.textContent = number;
     }
   }
 
